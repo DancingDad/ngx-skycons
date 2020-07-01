@@ -511,9 +511,13 @@ export class SkyconsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.ctx = this.canvas.nativeElement;
-    this.add(this.ctx);
-    this.play();
+    
+    // This avoids the nativeElement undefined error when upgrading to Angular 9
+    if (this.canvas !== undefined)
+      this.ctx = this.canvas.nativeElement;
+      this.add(this.ctx);
+      this.play();
+    }
   }
 
   add(el) {
